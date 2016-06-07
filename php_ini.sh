@@ -37,22 +37,52 @@ function &ini () {
   static $ini_content;
 
   if (!isset($ini_content)) {
-    if ($ini_path = php_ini_loaded_file()) {
-      if ($ini_content = file_get_contents($ini_path)) {
-        print "Loaded $ini_path\n";
-      }
-      else {
-        print "Cannot read $ini_path\n";
-        exit;
-      }
+    $ini_path = ini_path();
+
+    if ($ini_content = file_get_contents($ini_path)) {
+      print "Loaded $ini_path\n";
     }
     else {
-      print "A php.ini file is not loaded.\n";
+      print "Cannot read $ini_path\n";
       exit;
     }
   }
 
   return $ini_content;
+}
+
+/**
+ * Detects the ini file to edit.
+ *
+ * @return string
+ *   The path to php.ini file.
+ */
+function ini_path () {
+  static $ini_path;
+
+  if (!isset($ini_path)) {
+    $options = getopt('f:');
+
+    if (isset($options['f']) && is_string($options['f'])) {
+      if (is_file($options['f'])) {
+        $ini_path = $options['f'];
+      }
+      else {
+        print $options['f'] . " is not a file.\n";
+        exit;
+      }
+    }
+    else {
+      $ini_path = php_ini_loaded_file();
+
+      if (!$ini_path) {
+        print "A php.ini file is not loaded.\n";
+        exit;
+      }
+    }
+  }
+
+  return $ini_path;
 }
 
 /**
@@ -67,7 +97,7 @@ function &ini () {
  */
 function get_pair ($string) {
   $pair = explode('=', $string, 2);
-  return count($pair) == 2 && $pair[0] !== '' ? $pair : FALSE;
+  return count($pair) == 2 && $pair[0] !== '' && $pair[0]{0} !== '-' ? $pair : FALSE;
 }
 
 /**
@@ -100,7 +130,7 @@ function set_directive ($key, $value) {
  * Saves php.ini file with updated contents.
  */
 function save_ini () {
-  $ini_path = php_ini_loaded_file();
+  $ini_path = ini_path();
   $result = file_put_contents($ini_path, ini());
 
   if ($result === FALSE) {
