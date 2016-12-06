@@ -6,7 +6,7 @@ Linux shell script to update php.ini configuration options.
 git clone https://github.com/mikeshiyan/php_ini.sh.git
 cd php_ini.sh/
 chmod +x php_ini.sh
-sudo ln -s /absolute-path-to-this-script/php_ini.sh /usr/sbin/php_ini
+sudo ln -s /absolute-path-to-this-script/php_ini.sh /usr/local/bin/php_ini
 ```
 
 ## Examples
