@@ -1,12 +1,12 @@
-# php_ini.sh
-Linux shell script to update php.ini configuration options.
+# php_ini
+PHP script to update php.ini configuration options.
 
 ## Installation
 ```
-git clone https://github.com/mikeshiyan/php_ini.sh.git
-cd php_ini.sh/
-chmod +x php_ini.sh
-sudo ln -s /absolute-path-to-this-script/php_ini.sh /usr/local/bin/php_ini
+git clone https://github.com/mikeshiyan/php_ini.git
+cd php_ini/
+chmod +x php_ini.php
+sudo ln -s /absolute-path-to-this-script/php_ini.php /usr/local/bin/php_ini
 ```
 
 ## Examples

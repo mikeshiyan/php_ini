@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Linux shell script to update php.ini configuration options.
+ * PHP script to update php.ini configuration options.
  */
 
 /**
