@@ -5,6 +5,7 @@ PHP script to update php.ini configuration options.
 ```
 git clone https://github.com/mikeshiyan/php_ini.git
 cd php_ini/
+composer install
 chmod +x php_ini.php
 sudo ln -s /absolute-path-to-this-script/php_ini.php /usr/local/bin/php_ini
 ```
