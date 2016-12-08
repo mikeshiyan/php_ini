@@ -1,4 +1,12 @@
 {
+    "name": "mikeshiyan/php-ini",
+    "description": "PHP script to update php.ini configuration options.",
+    "keywords": ["php", "ini", "console"],
+    "license": "MIT",
+    "support": {
+        "source": "https://github.com/mikeshiyan/php_ini",
+        "issues": "https://github.com/mikeshiyan/php_ini/issues"
+    },
     "require": {
         "symfony/console": "^3.2"
     },
