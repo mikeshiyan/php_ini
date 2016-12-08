@@ -16,5 +16,5 @@ sudo php_ini memory_limit=512M session.name=PHPSESSID
 ```
 Do the same with another php.ini (not currently loaded):
 ```
-sudo php_ini -f=/etc/php/5.6/apache2/php.ini memory_limit=512M session.name=PHPSESSID
+sudo php_ini -f/etc/php/5.6/apache2/php.ini memory_limit=512M session.name=PHPSESSID
 ```
