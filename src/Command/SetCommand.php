@@ -77,7 +77,7 @@ class SetCommand extends Command {
     $this->phpIniFile = $input->getOption('file');
 
     foreach ($input->getArgument('config_option') as $argument) {
-      list($key, $value) = explode('=', $argument, 2);
+      @list($key, $value) = explode('=', $argument, 2);
       $this->phpIniConfig[$key] = $value;
     }
   }
