@@ -6,7 +6,15 @@
  * PHP script to update php.ini configuration options.
  */
 
-require __DIR__ . '/../vendor/autoload.php';
+$autoloaders[] = __DIR__ . '/../../../autoload.php';
+$autoloaders[] = __DIR__ . '/../vendor/autoload.php';
+
+foreach ($autoloaders as $file) {
+  if (file_exists($file)) {
+    require_once $file;
+    break;
+  }
+}
 
 use PhpIni\Command\SetCommand;
 use Symfony\Component\Console\Application;
