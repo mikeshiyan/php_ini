@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Provides the console command.
@@ -138,6 +139,7 @@ class SetCommand extends Command {
    * Makes the main job.
    */
   protected function doExecute() {
+    $this->createBackup();
     $this->readIni();
 
     foreach ($this->phpIniConfig as $key => $value) {
@@ -196,6 +198,18 @@ class SetCommand extends Command {
     }
 
     $this->output->writeln('php.ini updated successfully.');
+  }
+
+  /**
+   * Creates a backup of php.ini.
+   */
+  protected function createBackup() {
+    $target = $this->phpIniFile . '_backup_' . date('Ymd_His', filemtime($this->phpIniFile)) . 'UTC';
+
+    $fs = new Filesystem();
+    $fs->copy($this->phpIniFile, $target, TRUE);
+
+    $this->output->writeln(sprintf('Backup created in %s', $target), OutputInterface::VERBOSITY_VERBOSE);
   }
 
 }
