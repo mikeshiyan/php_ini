@@ -3,6 +3,7 @@
 namespace PhpIni\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Provides the console command.
  */
 class SetCommand extends Command {
+
+  use LockableTrait;
 
   /**
    * Path to the php.ini file.
@@ -120,6 +123,10 @@ class SetCommand extends Command {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
+    if (!$this->lock('php_ini set')) {
+      throw new RuntimeException('The command is already running in another process.');
+    }
+
     $this->parseInput($input);
     $this->validate();
 
