@@ -8,8 +8,9 @@
         "issues": "https://github.com/mikeshiyan/php_ini/issues"
     },
     "require": {
-        "symfony/console": "^3.2",
-        "symfony/filesystem": "^3.2"
+        "symfony/console": "^3.4.6",
+        "symfony/filesystem": "^3.4.6",
+        "symfony/lock": "^3.4.6"
     },
     "autoload": {
         "psr-4": {
